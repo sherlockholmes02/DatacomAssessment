@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">DatacomAssessment</string>
+    <string name="app_name">Datacom Assessment</string>
+    <string name="albumId">album_id</string>
+    <string name="no_internet">Please check your internet connection</string>
 </resources>

@@ -5,6 +5,5 @@ package com.exam.datacomassessment.model
  */
 data class Photo (
     var albumId: String,
-    var url: String,
-    var thumbnailUrl: String
+    var url: String
 )

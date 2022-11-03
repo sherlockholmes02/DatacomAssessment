@@ -1,7 +1,6 @@
 package com.exam.datacomassessment.main
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -42,7 +41,7 @@ class AlbumAdapter : ListAdapter<Album, AlbumAdapter.ViewHolder>(
             holder.binding.album = item
 
             holder.binding.root.setOnClickListener {
-                onItemClickListener.invoke(position)
+                onItemClickListener.invoke(item.id)
             }
         } catch (e: Exception) {
             e.printStackTrace()

@@ -1,7 +1,9 @@
 package com.exam.datacomassessment.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +12,9 @@ import com.exam.datacomassessment.R
 import com.exam.datacomassessment.databinding.ActivityMainBinding
 import com.exam.datacomassessment.network.ApiInterface
 import com.exam.datacomassessment.utils.Coroutines
+import com.exam.datacomassessment.utils.NetworkUtil
 import com.exam.datacomassessment.utils.RetrofitSingleton
+import com.exam.datacomassessment.view.ViewAlbumActivity
 
 class MainActivity : AppCompatActivity(), MainInterface {
 
@@ -21,6 +25,11 @@ class MainActivity : AppCompatActivity(), MainInterface {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        if (!NetworkUtil.isNetworkAvailable(this)) {
+            Toast.makeText(baseContext, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
+            return
+        }
+
         initUI()
         initData()
     }
@@ -28,7 +37,15 @@ class MainActivity : AppCompatActivity(), MainInterface {
     private fun initUI() {
         albumAdapter = AlbumAdapter().apply {
             setOnItemClickListener {
+                if (!NetworkUtil.isNetworkAvailable(baseContext)) {
+                    Toast.makeText(baseContext, getString(R.string.no_internet), Toast.LENGTH_SHORT)
+                        .show()
+                    return@setOnItemClickListener
+                }
 
+                val intent = Intent(this@MainActivity, ViewAlbumActivity::class.java)
+                intent.putExtra(getString(R.string.albumId), it)
+                startActivity(intent)
             }
         }
 
