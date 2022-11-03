@@ -20,6 +20,7 @@ I thought of two options to implement the mapping of the albums. I went for opti
     - I'll be iterating through the albums list with every item I'll call the user by id endpoint to get the value of the name.
     - The pro of this method is the app is more flexible. Let's say the users has more than 10 items. It won't need to reiterate through all of them.
     - The big con is there will be a lot of service call in which is not good.
+    - I created an option 2 branch just for kicks hehe. (Didn't really like the multiple calls)
 
 - Option 1
     - What I thought with option 1 is I'll call the the getUsers endpoint first to load all the users then call the getAlbums endpoint.
