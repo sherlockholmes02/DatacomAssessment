@@ -15,10 +15,9 @@ interface ApiInterface {
     @GET("albums")
     suspend fun getAlbums(): Response<List<Album>>
 
-    @GET("users/{userId}")
+    @GET("users")
     suspend fun getUser(
-        @Path("userId") userId: Int
-    ): Response<User>
+    ): Response<List<User>>
 
     @GET("photos/{albumId}")
     suspend fun getPhoto(

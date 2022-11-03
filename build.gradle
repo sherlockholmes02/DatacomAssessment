@@ -23,7 +23,7 @@ buildscript {
         lifecycle = "2.2.0"
         play_services_coroutines = "1.1.1"
         http_logger = "4.9.1"
-        retrofit_version = "2.8.1"
+        retrofit_version = "2.9.0"
         glide_version = "4.14.2"
     }
 }
