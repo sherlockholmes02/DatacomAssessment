@@ -2,8 +2,8 @@ package com.exam.datacomassessment.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.exam.datacomassessment.model.Album
-import com.exam.datacomassessment.model.User
+import com.exam.datacomassessment.data.model.Album
+import com.exam.datacomassessment.data.model.User
 import com.exam.datacomassessment.utils.Coroutines
 
 /**
@@ -30,6 +30,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
                         }
 
                         if (index == albums.size - 1) {
+                            mainRepository.saveAlbums(albums)
                             albumsLiveData.postValue(albums)
                             mainListener?.hideProgressBar()
                         }
@@ -37,6 +38,17 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
                 }
             } else {
                 mainListener?.hideProgressBar()
+            }
+        }
+    }
+
+    fun getAlbumsFromDb() {
+        Coroutines.inputOutput {
+            val albums = mainRepository.getAlbumsFromDb()
+            if (albums.isNullOrEmpty()) {
+                mainListener?.showCheckInternetConnection()
+            } else {
+                albumsLiveData.postValue(albums)
             }
         }
     }

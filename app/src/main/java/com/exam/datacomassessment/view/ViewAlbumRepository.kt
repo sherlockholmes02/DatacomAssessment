@@ -1,6 +1,6 @@
 package com.exam.datacomassessment.view
 
-import com.exam.datacomassessment.model.Photo
+import com.exam.datacomassessment.data.model.Photo
 import com.exam.datacomassessment.network.ApiInterface
 import retrofit2.Response
 

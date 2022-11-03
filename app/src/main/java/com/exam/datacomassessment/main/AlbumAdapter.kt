@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.exam.datacomassessment.R
 import com.exam.datacomassessment.databinding.ItemAlbumBinding
-import com.exam.datacomassessment.model.Album
+import com.exam.datacomassessment.data.model.Album
 
 /**
  * Created by Darryl Dave P. de Castro on 11/3/2022.

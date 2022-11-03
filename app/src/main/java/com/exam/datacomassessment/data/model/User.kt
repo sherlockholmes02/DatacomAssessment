@@ -1,4 +1,4 @@
-package com.exam.datacomassessment.model
+package com.exam.datacomassessment.data.model
 
 /**
  * Created by Darryl Dave P. de Castro on 11/3/2022.

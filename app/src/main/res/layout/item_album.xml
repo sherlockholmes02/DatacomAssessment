@@ -7,7 +7,7 @@
 
         <variable
             name="album"
-            type="com.exam.datacomassessment.model.Album" />
+            type="com.exam.datacomassessment.data.model.Album" />
 
     </data>
 

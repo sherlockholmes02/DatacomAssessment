@@ -1,8 +1,8 @@
 package com.exam.datacomassessment.network
 
-import com.exam.datacomassessment.model.Album
-import com.exam.datacomassessment.model.Photo
-import com.exam.datacomassessment.model.User
+import com.exam.datacomassessment.data.model.Album
+import com.exam.datacomassessment.data.model.Photo
+import com.exam.datacomassessment.data.model.User
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

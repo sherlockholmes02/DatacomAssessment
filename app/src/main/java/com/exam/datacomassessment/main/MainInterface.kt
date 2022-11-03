@@ -6,4 +6,5 @@ package com.exam.datacomassessment.main
 interface MainInterface {
     fun showProgressBar()
     fun hideProgressBar()
+    fun showCheckInternetConnection()
 }

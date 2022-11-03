@@ -2,7 +2,7 @@ package com.exam.datacomassessment.view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.exam.datacomassessment.model.Photo
+import com.exam.datacomassessment.data.model.Photo
 import com.exam.datacomassessment.utils.Coroutines
 
 /**

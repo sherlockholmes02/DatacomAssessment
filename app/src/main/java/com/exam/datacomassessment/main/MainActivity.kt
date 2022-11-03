@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.exam.datacomassessment.R
+import com.exam.datacomassessment.data.DatacomDatabase
 import com.exam.datacomassessment.databinding.ActivityMainBinding
 import com.exam.datacomassessment.network.ApiInterface
 import com.exam.datacomassessment.utils.Coroutines
@@ -25,11 +26,6 @@ class MainActivity : AppCompatActivity(), MainInterface {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        if (!NetworkUtil.isNetworkAvailable(this)) {
-            Toast.makeText(baseContext, getString(R.string.no_internet), Toast.LENGTH_SHORT).show()
-            return
-        }
-
         initUI()
         initData()
     }
@@ -38,8 +34,7 @@ class MainActivity : AppCompatActivity(), MainInterface {
         albumAdapter = AlbumAdapter().apply {
             setOnItemClickListener {
                 if (!NetworkUtil.isNetworkAvailable(baseContext)) {
-                    Toast.makeText(baseContext, getString(R.string.no_internet), Toast.LENGTH_SHORT)
-                        .show()
+                    showCheckInternetConnection()
                     return@setOnItemClickListener
                 }
 
@@ -58,14 +53,20 @@ class MainActivity : AppCompatActivity(), MainInterface {
     }
 
     private fun initData() {
+        val datacomDatabase = DatacomDatabase.getInstance()
         var apiInterface = RetrofitSingleton.get<ApiInterface>()
-        val mainRepository = MainRepository(apiInterface)
+        val mainRepository = MainRepository(apiInterface, datacomDatabase)
         val factory = MainViewModelFactory(mainRepository)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
         viewModel.mainListener = this
-        viewModel.getUsers()
         viewModel.albumsLiveData.observe(this) { albums ->
             albumAdapter.submitList(albums)
+        }
+
+        if (!NetworkUtil.isNetworkAvailable(this)) {
+            viewModel.getAlbumsFromDb()
+        } else {
+            viewModel.getUsers()
         }
     }
 
@@ -78,6 +79,13 @@ class MainActivity : AppCompatActivity(), MainInterface {
     override fun hideProgressBar() {
         Coroutines.main {
             binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    override fun showCheckInternetConnection() {
+        Coroutines.main {
+            Toast.makeText(baseContext, getString(R.string.no_internet), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }
